@@ -1,6 +1,7 @@
 import config from '../../cfg/config.js';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { useAuth } from '@/composables/useAuth.jsx';
+import { Player } from '@/components/Player.jsx';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: config.clientId
@@ -30,6 +31,7 @@ export const Dashboard = ({ code }) => {
 		if (searchLocation === null) return;
 		
 		spotifyApi.searchPlaylists(searchLocation, { limit: 1, offset: 0 }).then((res) => {
+			
 			setPlaylistResults(
 				res.body.playlists.items.map((playlist) => {
 					return {
@@ -40,12 +42,14 @@ export const Dashboard = ({ code }) => {
 					};
 				}),
 			);
+			
 			setPlaylistId(
 				res.body.playlists.items.map((playlist) => {
 					return playlist.id;
 				}),
 			);
 		});
+		//useEffect only runs when searchLocation is updated
 	}, [searchLocation]);
 	
 	useEffect(() => {
@@ -71,11 +75,31 @@ export const Dashboard = ({ code }) => {
 		});
 	}, [accessToken, playlistId]);
 	
+	const buttonToSetSearch = () => {
+		setLocationForSearch('sunny');
+	}
+	
+	const buttonToSetFirstTrackUri = () => {
+		if (playlistTracks.length > 0) {
+			selectTrack(playlistTracks[0]?.uri);
+		}
+	}
 	
 	return (
-		<div>
+		<div className="flex flex-col justify-center items-center">
 			<h1>Dashboard</h1>
-			{ accessToken }
+			<button onClick={buttonToSetSearch}>
+				search
+			</button>
+			<button onClick={buttonToSetFirstTrackUri}>
+				set first track
+			</button>
+			<div>searchLocation: {searchLocation}</div>
+			<div>playlistId: {playlistId}</div>
+			<div>playlistResults: {playlistResults.length}</div>
+			<div>playlistTracks: {playlistTracks.length}</div>
+			<div>active track: {activeTrack}</div>
+			<Player accessToken={accessToken} trackUri={activeTrack} />
 		</div>
-	)
+	);
 }
