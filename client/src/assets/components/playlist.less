@@ -1,0 +1,33 @@
+.playlist-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	
+	gap: var(--length-large);
+	padding: var(--length-medium);
+	width: 450px;
+	height: 500px;
+	
+	background: rgba(255, 255, 255, 0.4);
+}
+
+.playlist-header {
+	display: flex;
+	flex-direction: row;
+}
+
+.playlist-header-image {
+	width: 100px;
+	height: 100px;
+}
+
+.playlist-tracks {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	
+	height: 400px;
+	width: 100%;
+	overflow: auto;
+}
