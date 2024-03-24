@@ -19,9 +19,11 @@ export const Playlist = ({ accessToken, playlist, playlistTracks }) => {
 			>
 				<img
 					src={playlist[0].imageUrl}
-					className='playlist-header-image'
+					className='playlist-image'
 				/>
-				{playlist[0].name}
+				<div className='playlist-name'>
+					{playlist[0].name}
+				</div>
 			</div>
 			<div className='playlist-tracks'>
 				{playlistTracks.map((track) => (

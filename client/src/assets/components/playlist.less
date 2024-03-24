@@ -6,20 +6,37 @@
 	
 	gap: var(--length-large);
 	padding: var(--length-medium);
-	width: 450px;
-	height: 500px;
+	width: 550px;
+	height: 600px;
 	
 	background: rgba(255, 255, 255, 0.4);
 }
 
 .playlist-header {
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 100px;
+	gap: var(--length-medium);
+	width: 100%;
 }
 
-.playlist-header-image {
+.playlist-image {
 	width: 100px;
 	height: 100px;
+	
+	justify-self: flex-end;
+}
+
+.playlist-name {
+	font-size: var(--font-size-medium);
+	justify-self: flex-start;
+	align-self: center;
+	
+	width: 100%;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	--webkit-line-clamp: 1;
 }
 
 .playlist-tracks {

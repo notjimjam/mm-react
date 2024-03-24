@@ -80,16 +80,20 @@ export const Dashboard = ({ code }) => {
 			<button onClick={buttonToSetSearch}>
 				search
 			</button>
-			<div>searchLocation: {searchLocation}</div>
-			<div>playlistId: {playlistId}</div>
-			<div>playlist: {playlist.length}</div>
-			<div>playlistTracks: {playlistTracks.length}</div>
+			
 			{playlist.length > 0 ? <Playlist
 				accessToken={accessToken}
 				playlist={playlist}
 				playlistTracks={playlistTracks}
 			/> : 'search for playlist'}
 			
+			
+			<div className='temporary-class-delete'>
+				<div>search location: {searchLocation}</div>
+				<div>playlist id: {playlistId}</div>
+				<div>playlist: {playlist[0].name}</div>
+				<div>playlist tracks length: {playlistTracks.length}</div>
+			</div>
 		</div>
 	);
 }
