@@ -7,12 +7,20 @@ import { Playlist } from '@/components/Playlist.jsx';
 const spotifyApi = new SpotifyWebApi({
   clientId: config.clientId
 });
+
 export const Dashboard = ({ code }) => {
 	const accessToken = useAuth(code);
 	const [playlist, setPlaylist] = useState([]);
 	const [playlistId, setPlaylistId] = useState();
 	const [playlistTracks, setPlaylistTracks] = useState([]);
 	const [searchLocation, setSearchLocation] = useState(null);
+	
+	const PlaylistName = () => {
+		if (playlist.length > 0) {
+			return <div>playlist: {playlist[0].name}</div>
+		}
+		return <div>no playlist</div>
+	}
 	
 	const setLocationForSearch = (location) => {
 		setSearchLocation(location);
@@ -91,7 +99,7 @@ export const Dashboard = ({ code }) => {
 			<div className='temporary-class-delete'>
 				<div>search location: {searchLocation}</div>
 				<div>playlist id: {playlistId}</div>
-				<div>playlist: {playlist[0].name}</div>
+				<PlaylistName />
 				<div>playlist tracks length: {playlistTracks.length}</div>
 			</div>
 		</div>
