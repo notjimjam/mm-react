@@ -1,0 +1,20 @@
+@font-face {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: 400;
+	src: local(Inter-Regular), url(./Inter-Regular.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: 700;
+	src: local(Inter-SemiBold), url(./Inter-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+	font-family: Inter;
+	font-style: normal;
+	font-weight: 200;
+	src: local(Inter-ExtraLight), url(./Inter-ExtraLight.ttf) format('truetype');
+}
