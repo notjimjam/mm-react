@@ -11,7 +11,7 @@ export const Playlist = ({ accessToken, playlist, playlistTracks }) => {
 	}
 	
 	return (
-		<div className='playlist-card'>
+		<div className='playlist-card card'>
 			<div
 				className='playlist-header'
 				onLoad={() => selectTrack(playlist[0].uri)}
