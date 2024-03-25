@@ -1,4 +1,25 @@
 :root {
+	///region Colors
+	--color-background-dark: #1a1a1a;
+	--color-background-light: #ffffff;
+	--color-background-blue: #448d98;
+	
+	--color-background-gradient: linear-gradient(var(--color-background-light), var(--color-background-blue)) no-repeat;
+	--color-button-gradient: linear-gradient(135deg, #333, #666) no-repeat;
+	
+	--color-dark: var(--color-background-dark);
+	--color-light: var(--color-background-light);
+	
+	--color-text-dark: var(--color-dark);
+	--color-text-light: var(--color-light);
+	
+	--color-card-background: rgba(255, 255, 255, 0.4);
+	
+	--color-black: #000000;
+	--color-white: #ffffff;
+	///endregion
+	
+	///region Universal Variables
 	--length-mini: 3px;
 	--length-tiny: 5px;
 	--length-small: 8px;
@@ -9,7 +30,7 @@
 	
 	--line-height: 1;
 	
-	--border-radius: 0px;
+	--border-radius: var(--length-tiny);
 	
 	// Use with classes: `.font-size-{length}` or `.font-{length}`
 	--font-size-mini: 12px;
@@ -27,7 +48,20 @@
 	--font-size-h3: 32px;
 	--font-size-h2: 48px;
 	--font-size-h1: 64px;
+	///endregion
 	
+	///region Layout
 	--header-height: 150px;
 	--footer-height: 100px;
+	///endregion
+	
+	///region Buttons
+	--button-padding-x: var(--length-small);
+	--button-padding-y: var(--length-small);
+	--button-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25), inset 0 1px 1px 1px rgba(255, 255, 255, 0.35);
+	--button-border: none;
+	--button-border-radius: var(--border-radius);
+	
+	--button-rectangle-width: 140px;
+	--button-rectangle-height: 70px;
 }
