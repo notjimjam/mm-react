@@ -4,4 +4,8 @@ export default {
 	signUpUrl: 'https://www.spotify.com/us/signup',
 	
 	clientId: '6f5b9cf484324457963e8226b61fd6e6',
+	
+	weatherBaseUrl: 'https://api.openweathermap.org/data/2.5/weather',
+	
+	weatherApiKey: 'a58c70473a64313eecf176d311de0ce5',
 }
