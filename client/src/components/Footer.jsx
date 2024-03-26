@@ -6,7 +6,6 @@ export const Footer = () => {
 				alt="Spotify Logo"
 				style={{width: "139px", height: "40px"}}
 			/>
-			<br/>
 			<div>Created by Jamie Smith</div>
 		</footer>
 	)
