@@ -1,8 +1,8 @@
 import config from '../../cfg/config.js';
 import SpotifyWebApi from 'spotify-web-api-node';
 import { useAuth } from '@/composables/useAuth.jsx';
-import { Player } from '@/components/Player.jsx';
 import { Playlist } from '@/components/Playlist.jsx';
+import { Weather } from '@/components/Weather.jsx';
 
 const spotifyApi = new SpotifyWebApi({
   clientId: config.clientId
@@ -14,13 +14,6 @@ export const Dashboard = ({ code }) => {
 	const [playlistId, setPlaylistId] = useState();
 	const [playlistTracks, setPlaylistTracks] = useState([]);
 	const [searchLocation, setSearchLocation] = useState(null);
-	
-	const PlaylistName = () => {
-		if (playlist.length > 0) {
-			return <div>playlist: {playlist[0].name}</div>
-		}
-		return <div>no playlist</div>
-	}
 	
 	const setLocationForSearch = (location) => {
 		setSearchLocation(location);
@@ -79,29 +72,19 @@ export const Dashboard = ({ code }) => {
 		});
 	}, [accessToken, playlistId]);
 	
-	const buttonToSetSearch = () => {
-		setLocationForSearch('sunny');
-	}
-	
 	return (
-		<div className="flex flex-col justify-center items-center">
-			<button onClick={buttonToSetSearch}>
-				search
-			</button>
+		<div className="flex flex-col justify-center items-center gap-small">
+			<Weather
+				setLocationForSearch={setLocationForSearch}
+				searchLocation={searchLocation}
+				setSearchLocation={setLocationForSearch}
+			/>
 			
-			{playlist.length > 0 ? <Playlist
+			<Playlist
 				accessToken={accessToken}
 				playlist={playlist}
 				playlistTracks={playlistTracks}
-			/> : 'search for playlist'}
-			
-			
-			<div className='temporary-class-delete'>
-				<div>search location: {searchLocation}</div>
-				<div>playlist id: {playlistId}</div>
-				<PlaylistName />
-				<div>playlist tracks length: {playlistTracks.length}</div>
-			</div>
+			/>
 		</div>
 	);
 }
