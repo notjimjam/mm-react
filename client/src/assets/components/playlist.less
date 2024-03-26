@@ -1,14 +1,19 @@
 .playlist-card {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+	display: grid;
+	grid-template-areas:
+		"playlist-header"
+		"tracks"
+		"player";
+	grid-template-columns: 1fr;
+	grid-template-rows: var(--playlist-header-height) calc(100% - var(--playlist-header-height) - var(--player-height) - 2*var(--length-medium)) var(--player-height);
+	gap: var(--length-medium);
 }
 
 .playlist-header {
+	grid-area: playlist-header;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 100px;
+	grid-template-rows: var(--playlist-header-height);
 	gap: var(--length-medium);
 	width: 100%;
 }
@@ -33,11 +38,17 @@
 }
 
 .playlist-tracks {
+	grid-area: tracks;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	
 	height: 400px;
 	width: 100%;
+	padding: 0 0 var(--length-medium);
 	overflow: auto;
+}
+
+.player {
+	grid-area: player;
 }

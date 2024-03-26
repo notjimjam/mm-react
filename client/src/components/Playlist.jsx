@@ -12,7 +12,7 @@ export const Playlist = ({ accessToken, playlist, playlistTracks }) => {
 	
 	return (
 		<div className='playlist-card card'>
-			<div
+			{playlist.length > 0 ? <div
 				className='playlist-header'
 				onLoad={() => selectTrack(playlist[0].uri)}
 				onClick={() => selectTrack(playlist[0].uri)}
@@ -24,8 +24,9 @@ export const Playlist = ({ accessToken, playlist, playlistTracks }) => {
 				<div className='playlist-name'>
 					{playlist[0].name}
 				</div>
-			</div>
-			<div className='playlist-tracks'>
+			</div> : <div className='playlist-header'></div>}
+			
+			{playlistTracks.length > 0 ? <div className='playlist-tracks'>
 				{playlistTracks.map((track) => (
 					<PlaylistTrack
 						track={track}
@@ -33,8 +34,9 @@ export const Playlist = ({ accessToken, playlist, playlistTracks }) => {
 						selectTrack={selectTrack}
 					/>
 				))}
-			</div>
-			<Player accessToken={accessToken} trackUri={activeTrack} />
+			</div> : <div className='playlist-tracks'></div>}
+			
+			<Player className='player' accessToken={accessToken} trackUri={activeTrack} />
 		</div>
 	)
 }
