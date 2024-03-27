@@ -6,7 +6,7 @@ export const Footer = () => {
 				alt="Spotify Logo"
 				style={{width: "139px", height: "40px"}}
 			/>
-			<div style={{color: 'var(--color-light)'}}>Created by Jamie Smith</div>
+			<div className='font-tiny' style={{color: 'var(--color-light)'}}>Created by Jamie Smith</div>
 		</footer>
 	)
 }

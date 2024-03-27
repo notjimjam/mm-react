@@ -3,9 +3,9 @@ export const Header = () => {
 	return (
 		<header id='header'>
 			<img
-				src="/logos/mm-logo-white.svg"
+				src="/icons/mm-icon-mix.svg"
 				alt="Music Meteorologist Logo"
-				style={{width: "175px", height: "175px"}}
+				style={{width: "200px", height: "200px"}}
 			/>
 		</header>
 	)
