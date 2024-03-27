@@ -28,6 +28,12 @@ export const Weather = ({ setLocationForSearch, searchLocation, setSearchLocatio
 		setHasLocation(true);
 	}
 	
+	const onKeyDown = (event) => {
+		if (event.key === 'Enter') {
+			submitLocation(event);
+		}
+	}
+	
 	const enterNewLocation = (event) => {
 		event.preventDefault();
 		setHasLocation(false);
@@ -114,12 +120,13 @@ export const Weather = ({ setLocationForSearch, searchLocation, setSearchLocatio
 					onClick={enterNewLocation}
 					className='button small'
 				>
-					Change
+					Change?
 				</button> :
 				
 				<div className='flex flex-row justify-center items-center gap-small'>
 					<input
 						onChange={inputHandler}
+						onKeyDown={(e) => {onKeyDown(e)}}
 						type='text'
 						placeholder='Enter Location'
 					/>
