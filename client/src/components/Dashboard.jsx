@@ -13,11 +13,7 @@ export const Dashboard = ({ code }) => {
 	const [playlist, setPlaylist] = useState([]);
 	const [playlistId, setPlaylistId] = useState();
 	const [playlistTracks, setPlaylistTracks] = useState([]);
-	const [searchLocation, setSearchLocation] = useState(null);
-	
-	const setLocationForSearch = (location) => {
-		setSearchLocation(location);
-	}
+	const [playlistName, setPlaylistName] = useState(null);
 	
 	useEffect(() => {
 		if (! accessToken) return;
@@ -25,9 +21,9 @@ export const Dashboard = ({ code }) => {
 	}, [accessToken]);
 	
 	useEffect(() => {
-		if (searchLocation === null) return;
-		
-		spotifyApi.searchPlaylists(searchLocation, { limit: 1, offset: 0 }).then((res) => {
+		if (playlistName === null) return;
+		console.log(playlistName)
+		spotifyApi.searchPlaylists(playlistName, { limit: 1, offset: 0 }).then((res) => {
 			
 			setPlaylist(
 				res.body.playlists.items.map((playlist) => {
@@ -46,8 +42,8 @@ export const Dashboard = ({ code }) => {
 				}),
 			);
 		});
-		//useEffect only runs when searchLocation is updated
-	}, [searchLocation]);
+		//useEffect only runs when playlistName is updated
+	}, [playlistName]);
 	
 	useEffect(() => {
 		if (! accessToken) return;
@@ -75,9 +71,8 @@ export const Dashboard = ({ code }) => {
 	return (
 		<div className="flex flex-col justify-center items-center gap-small">
 			<Weather
-				setLocationForSearch={setLocationForSearch}
-				searchLocation={searchLocation}
-				setSearchLocation={setLocationForSearch}
+				playlistName={playlistName}
+				setPlaylistName={setPlaylistName}
 			/>
 			
 			<Playlist
