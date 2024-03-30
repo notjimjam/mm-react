@@ -1,4 +1,5 @@
 import config from '../../cfg/config.js';
+import { MMButton } from '@/components/MMButton.jsx';
 const authUrl = config.authUrl;
 const signUpUrl = config.signUpUrl;
 export const Login = () => {
@@ -25,18 +26,18 @@ export const Login = () => {
 						<br/>
 						powered by Spotify
 					</div>
-					<button
-						onClick={loginHandler}
-						className='button'
+					<MMButton
+						clickFunction={loginHandler}
+						extraClass='button'
 					>
 						Log In With Spotify
-					</button>
-					<button
-						onClick={signUpHandler}
-						className='button'
+					</MMButton>
+					<MMButton
+						clickFunction={signUpHandler}
+						extraClass='button'
 					>
 						Sign Up For Spotify
-					</button>
+					</MMButton>
 				</div>
 			</div>
 		</div>

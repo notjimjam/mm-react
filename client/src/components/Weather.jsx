@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from '../../cfg/config.js';
 import playlistNames from '../../cfg/playlist-names.js';
+import { MMButton } from '@/components/MMButton.jsx';
 
 const baseUrl = config.weatherBaseUrl;
 const weatherKey = config.weatherApiKey;
@@ -13,7 +14,6 @@ export const Weather = ({ setLocationForSearch, searchLocation, setSearchLocatio
 	const [condition, setCondition] = useState(null);
 	const [wind, setWind] = useState(null);
 	const [shuffleArray, setShuffleArray] = useState([]);
-	
 	const  randomArrayItem = (array) => {
 		return array[Math.floor(Math.random() * array.length)];
 	};
@@ -116,12 +116,12 @@ export const Weather = ({ setLocationForSearch, searchLocation, setSearchLocatio
 	return (
 		<div className='flex flex-row justify-center items-center gap-small'>
 			{hasLocation ?
-				<button
-					onClick={enterNewLocation}
-					className='button small'
+				<MMButton
+					clickFunction={enterNewLocation}
+					extraClass='button small'
 				>
 					Change?
-				</button> :
+				</MMButton> :
 				
 				<div className='flex flex-row justify-center items-center gap-small'>
 					<input
@@ -130,21 +130,20 @@ export const Weather = ({ setLocationForSearch, searchLocation, setSearchLocatio
 						type='text'
 						placeholder='Enter Location'
 					/>
-					<button
-						onClick={submitLocation}
-						className='button small'
+					<MMButton
+						clickFunction={submitLocation}
+						extraClass='small'
 					>
 						Search
-					</button>
+					</MMButton>
 				</div>
 			}
-			<button
-				onClick={shufflePlaylists}
-				disabled={!shuffleArray}
-				className='button small'
+			<MMButton
+				clickFunction={shufflePlaylists}
+				extraClass='small'
 			>
 				Shuffle
-			</button>
+			</MMButton>
 		</div>
 		
 	)
