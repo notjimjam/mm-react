@@ -21,5 +21,7 @@ export default {
 	
 	thunder: ['Dark and Stormy', 'stormy lofi', 'thunderstorm mix', 'the thunderstorm playlist', 'mid:nite storms', 'villain mode', 'dark and moody deep house'],
 	
-	clear: ['late night slow chill', 'atmospheric piano', 'Goodnight Mix', 'cosmic country', 'Night Time Vibes🌙', 'Mellow Evening', 'moonlight bumps'],
+	clear: ['the spring soundtrack', 'warm breeze | spring lofi', 'Sensational Sun', 'clear skies and vibes', 'bare feet, blue skies, clear mind', 'Bright Blue Skies Radio'],
+	
+	clearNight: ['late night slow chill', 'atmospheric piano', 'Goodnight Mix', 'cosmic country', 'Night Time Vibes🌙', 'Mellow Evening', 'moonlight bumps'],
 }
