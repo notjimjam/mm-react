@@ -14,6 +14,7 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 	const [condition, setCondition] = useState(null);
 	const [wind, setWind] = useState(null);
 	const [shuffleArray, setShuffleArray] = useState([]);
+	
 	const  randomArrayItem = (array) => {
 		return array[Math.floor(Math.random() * array.length)];
 	};
@@ -45,10 +46,9 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 	
 	useEffect(() => {
 		if (! value) return
-		
-		axios.get(`${baseUrl}?q=${value}&appid=${weatherKey}`)
-		.then((res) => {
-			setWeather(res.data)
+		const locationUrl = isNaN(parseInt(value)) ? 'q=' : 'zip='
+		axios.get(`${baseUrl}?${locationUrl}${value}&appid=${weatherKey}`).then((res) => {
+			setWeather(res.data);
 		}).catch((err) => {
 			console.log(err)
 			alert('please enter valid location (ex. zipcode, city, or lat/long)')
@@ -59,13 +59,13 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 		if (weather !== null) {
 			setCondition(weather?.weather[0]?.main);
 			setWind(weather?.wind?.speed);
+			console.log(weather)
 		}
 	},[weather]);
 	
 	useEffect(() => {
 		if (!condition || !wind) return;
-		
-		if(wind >= 30) {
+		if(wind >= 15) {
 			setPlaylistName(randomArrayItem(playlistNames.windy));
 			setShuffleArray(playlistNames.windy)
 			document.body.className = 'mood-windy';
@@ -129,6 +129,7 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 						onKeyDown={(e) => {onKeyDown(e)}}
 						type='text'
 						placeholder='Enter Location'
+						className='input'
 					/>
 					<MMButton
 						clickFunction={submitLocation}
