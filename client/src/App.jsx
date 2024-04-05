@@ -7,12 +7,18 @@ import { Footer } from '@/components/Footer.jsx';
 const code = new URLSearchParams(window.location.search).get('code');
 
 function App() {
-
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	
+	useEffect(() => {
+		if (code) {
+			setIsLoggedIn(true);
+		}
+	}, [code]);
   return (
     <div className='app'>
 	    <Header />
 	    <article id='article'>
-		    {code ? <Dashboard code={code} /> : <Login />}
+		    {isLoggedIn ? <Dashboard code={code} setIsLoggedIn={setIsLoggedIn}/> : <Login />}
 	    </article>
 	    <Footer />
     </div>
