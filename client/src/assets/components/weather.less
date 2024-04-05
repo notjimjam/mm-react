@@ -1,3 +1,19 @@
+.input {
+	border: 2px solid var(--color-background-dark);
+	border-radius: var(--border-radius);
+	background: var(--color-card-background);
+	box-sizing: border-box;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+}
+
+.input:focus {
+	outline: none;
+	border: 2px solid var(--color-background-blue);
+}
+
+
+// below are the background images being added for the different weather conditions
 .mood-windy {
 	background-image: url('/images/windy.jpg');
 	background-size: cover;
