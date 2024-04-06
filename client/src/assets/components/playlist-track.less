@@ -1,6 +1,14 @@
 .track {
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.track-info {
+	display: flex;
+	flex-direction: row;
 	justify-content: flex-start;
 	align-items: center;
 	padding: var(--length-tiny) var(--length-medium);
@@ -12,7 +20,15 @@
 	height: 64px;
 }
 
-.track-info {
+
+.track-placeholder-image {
+	width: 64px;
+	height: 64px;
+	
+	background-color: var(--color-background-dark);
+}
+
+.track-description {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -29,4 +45,9 @@
 
 .track-artist {
 
+}
+
+.track-icon {
+	height: 20px;
+	width: 20px;
 }

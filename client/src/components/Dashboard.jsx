@@ -21,6 +21,22 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		spotifyApi.resetCredentials();
 		setIsLoggedIn(false);
 		document.body.className = '';
+	};
+	
+	const addSongToLikedPlaylist = (uri) => {
+		spotifyApi.addToMySavedTracks([uri]).then((res) => {
+			console.log(`added track with uri: ${uri} to liked songs`);
+		}, (err) => {
+			console.log(`error adding track with uri: ${uri} to liked songs`, err);
+		});
+	}
+	
+	const removeSongFromLikedPlaylist = (uri) => {
+		spotifyApi.removeFromMySavedTracks([uri]).then((res) => {
+			console.log(`removed track with uri: ${uri} from liked songs`);
+		}, (err) => {
+			console.log(`error removing track with uri: ${uri} from liked songs`, err);
+		});
 	}
 	
 	useEffect(() => {
@@ -54,16 +70,10 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		spotifyApi.getPlaylistTracks(playlist[0].id).then((res) => {
 			setPrefilteredPlaylistTracks(
 				res.body.items.map((item, index) => {
-					// console.log(item)
-					if (item.track === null) {
-						//remove from array
-						
-					}
 					const smallestAlbumImage = item?.track?.album?.images.reduce((smallest, image) => {
 						if (image.height < smallest.height) return image;
 						return smallest;
 					}, item.track.album.images[0]);
-					
 					
 					return {
 						artist: item?.track?.artists[0]?.name,
