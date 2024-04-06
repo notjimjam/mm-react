@@ -13,6 +13,7 @@ const spotifyApi = new SpotifyWebApi({
 export const Dashboard = ({ code, setIsLoggedIn }) => {
 	const accessToken = useAuth(code);
 	const [playlist, setPlaylist] = useState([]);
+	const [prefilteredPlaylistTracks, setPrefilteredPlaylistTracks] = useState([]);
 	const [playlistTracks, setPlaylistTracks] = useState([]);
 	const [playlistName, setPlaylistName] = useState(null);
 	
@@ -51,8 +52,7 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		if (! playlist.length > 0) return;
 		
 		spotifyApi.getPlaylistTracks(playlist[0].id).then((res) => {
-			console.log(res)
-			setPlaylistTracks(
+			setPrefilteredPlaylistTracks(
 				res.body.items.map((item, index) => {
 					// console.log(item)
 					if (item.track === null) {
@@ -76,6 +76,10 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 			);
 		});
 	}, [playlist]);
+	
+	useEffect(() => {
+		setPlaylistTracks(prefilteredPlaylistTracks.filter((track) => track.uri !== undefined));
+	}, [prefilteredPlaylistTracks]);
 	
 	return (
 		<div className="flex flex-col justify-center items-center gap-small relative">
