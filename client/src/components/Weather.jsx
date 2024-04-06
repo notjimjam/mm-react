@@ -6,7 +6,7 @@ import { MMButton } from '@/components/MMButton.jsx';
 const baseUrl = config.weatherBaseUrl;
 const weatherKey = config.weatherApiKey;
 
-export const Weather = ({ playlistName, setPlaylistName }) => {
+export const Weather = ({ playlistName, setPlaylistName, setPlaylistTracks }) => {
 	const [input, setInput] = useState('');
 	const [value, setValue] = useState('');
 	const [hasLocation, setHasLocation] = useState(false);
@@ -41,7 +41,9 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 	}
 	
 	const shufflePlaylists = () => {
+		const playlistTracks = document.getElementsByClassName('playlist-tracks');
 		setPlaylistName(randomArrayItem(shuffleArray));
+		playlistTracks.scroll = { top: 0, behavior: 'smooth' };
 	}
 	
 	useEffect(() => {
@@ -59,7 +61,6 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 		if (weather !== null) {
 			setCondition(weather?.weather[0]?.main);
 			setWind(weather?.wind?.speed);
-			console.log(weather)
 		}
 	},[weather]);
 	
@@ -110,8 +111,7 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 			setShuffleArray(playlistNames.clear)
 			document.body.className = 'mood-clear';
 		}
-	}, [condition, wind])
-	
+	}, [condition, wind]);
 	
 	return (
 		<div className='flex flex-row justify-center items-center gap-small'>
@@ -143,7 +143,7 @@ export const Weather = ({ playlistName, setPlaylistName }) => {
 				clickFunction={shufflePlaylists}
 				extraClass='small'
 			>
-				Shuffle
+				New
 			</MMButton>
 		</div>
 		
