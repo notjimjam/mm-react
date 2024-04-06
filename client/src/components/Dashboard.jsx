@@ -67,7 +67,10 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		if (! accessToken) return;
 		if (! playlist.length > 0) return;
 		
+		
 		spotifyApi.getPlaylistTracks(playlist[0].id).then((res) => {
+			//reset playlistTracks to empty array to avoid any issues with previous playlistTracks
+			setPlaylistTracks([]);
 			setPrefilteredPlaylistTracks(
 				res.body.items.map((item, index) => {
 					const smallestAlbumImage = item?.track?.album?.images.reduce((smallest, image) => {
