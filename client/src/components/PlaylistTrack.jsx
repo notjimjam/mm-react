@@ -25,11 +25,6 @@ export const PlaylistTrack = ({ playlist, track, selectTrack, activeTrack }) => 
 					}
 				</div>
 			</div>
-			<img
-				src={'/icons/add.png'}
-				className='icon-gray track-icon'
-				alt='add to liked songs'
-			/>
 		</div>
 	)
 }
