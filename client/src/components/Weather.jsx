@@ -2,6 +2,7 @@ import axios from 'axios';
 import config from '../../cfg/config.js';
 import playlistNames from '../../cfg/playlist-names.js';
 import { MMButton } from '@/components/MMButton.jsx';
+import { useCheckCondition } from '@/composables/useCheckCondition.jsx';
 
 const baseUrl = config.weatherBaseUrl;
 const weatherKey = config.weatherApiKey;
@@ -64,65 +65,25 @@ export const Weather = ({ playlistName, setPlaylistName, setPlaylistTracks }) =>
 		}
 	},[weather]);
 	
-	useEffect(() => {
-		if (!condition || !wind) return;
-		if(wind >= 15) {
-			setPlaylistName(randomArrayItem(playlistNames.windy));
-			setShuffleArray(playlistNames.windy)
-			document.body.className = 'mood-windy';
-		} else if(condition.toLowerCase().includes('sunny')) {
-			setPlaylistName(randomArrayItem(playlistNames.sunny));
-			setShuffleArray(playlistNames.sunny)
-			document.body.className = 'mood-sunny';
-		} else if(condition.toLowerCase().includes('partly')) {
-			setPlaylistName(randomArrayItem(playlistNames.partly));
-			setShuffleArray(playlistNames.partly)
-			document.body.className = 'mood-partly';
-		} else if(condition.toLowerCase().includes('freezing')) {
-			setPlaylistName(randomArrayItem(playlistNames.freezing));
-			setShuffleArray(playlistNames.freezing)
-			document.body.className = 'mood-freezing';
-		} else if(condition.toLowerCase().includes('pellets')) {
-			setPlaylistName(randomArrayItem(playlistNames.hail));
-			setShuffleArray(playlistNames.hail)
-			document.body.className = 'mood-hail';
-		} else if(condition.toLowerCase().includes('snow') || condition.toLowerCase().includes('blizzard')) {
-			setPlaylistName(randomArrayItem(playlistNames.snow));
-			setShuffleArray(playlistNames.snow)
-			document.body.className = 'mood-snow';
-		} else if(condition.toLowerCase().includes('moderate rain') || condition.toLowerCase().includes('heavy rain') || condition.toLowerCase().includes('torrential')) {
-			setPlaylistName(randomArrayItem(playlistNames.rain));
-			setShuffleArray(playlistNames.rain)
-			document.body.className = 'mood-rain';
-		} else if(condition.toLowerCase().includes('cloud') || condition.toLowerCase().includes('overcast')) {
-			setPlaylistName(randomArrayItem(playlistNames.cloudy));
-			setShuffleArray(playlistNames.cloudy)
-			document.body.className = 'mood-cloudy';
-		} else if(condition.toLowerCase().includes('mist') || condition.toLowerCase().includes('fog') || condition.toLowerCase().includes('haze')) {
-			setPlaylistName(randomArrayItem(playlistNames.fog));
-			setShuffleArray(playlistNames.fog)
-			document.body.className = 'mood-fog';
-		} else if(condition.toLowerCase().includes('thunder')) {
-			setPlaylistName(randomArrayItem(playlistNames.thunder));
-			setShuffleArray(playlistNames.thunder)
-			document.body.className = 'mood-thunder';
-		} else if(condition.toLowerCase().includes('clear')) {
-			setPlaylistName(randomArrayItem(playlistNames.clear));
-			setShuffleArray(playlistNames.clear)
-			document.body.className = 'mood-clear';
-		}
-	}, [condition, wind]);
+	useCheckCondition({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem, playlistNames });
 	
 	return (
 		<div className='flex flex-row justify-center items-center gap-small'>
 			{hasLocation ?
-				<MMButton
-					clickFunction={enterNewLocation}
-					extraClass='button small'
-				>
-					Change?
-				</MMButton> :
-				
+				<div className='flex flex-row justify-center items-center gap-small'>
+					<MMButton
+						clickFunction={enterNewLocation}
+						extraClass='button small'
+					>
+						Change?
+					</MMButton>
+					<MMButton
+						clickFunction={shufflePlaylists}
+						extraClass='small'
+					>
+						New
+					</MMButton>
+				</div>:
 				<div className='flex flex-row justify-center items-center gap-small'>
 					<input
 						onChange={inputHandler}
@@ -139,12 +100,6 @@ export const Weather = ({ playlistName, setPlaylistName, setPlaylistTracks }) =>
 					</MMButton>
 				</div>
 			}
-			<MMButton
-				clickFunction={shufflePlaylists}
-				extraClass='small'
-			>
-				New
-			</MMButton>
 		</div>
 		
 	)
