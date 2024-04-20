@@ -6,11 +6,11 @@ export const Login = () => {
 	
 	const loginHandler = (e) => {
 		e.preventDefault();
-		window.location.href = config.authUrl;
+		window.location.href = authUrl;
 	}
 	const signUpHandler = (e) => {
 		e.preventDefault();
-		window.location.href = config.signUpUrl;
+		window.location.href = signUpUrl;
 	}
 	
 	return (
