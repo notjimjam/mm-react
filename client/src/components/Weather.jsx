@@ -1,13 +1,12 @@
 import axios from 'axios';
 import config from '../../cfg/config.js';
-import playlistNames from '../../cfg/playlist-names.js';
 import { MMButton } from '@/components/MMButton.jsx';
 import { useCheckCondition } from '@/composables/useCheckCondition.jsx';
 
 const baseUrl = config.weatherBaseUrl;
 const weatherKey = config.weatherApiKey;
 
-export const Weather = ({ playlistName, setPlaylistName, setPlaylistTracks }) => {
+export const Weather = ({ setPlaylistName }) => {
 	const [input, setInput] = useState('');
 	const [value, setValue] = useState('');
 	const [hasLocation, setHasLocation] = useState(false);
@@ -65,7 +64,7 @@ export const Weather = ({ playlistName, setPlaylistName, setPlaylistTracks }) =>
 		}
 	},[weather]);
 	
-	useCheckCondition({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem, playlistNames });
+	useCheckCondition({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem });
 	
 	return (
 		<div className='flex flex-row justify-center items-center gap-small'>
