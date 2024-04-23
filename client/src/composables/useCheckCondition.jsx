@@ -1,6 +1,20 @@
 import playlistNames from '../../cfg/playlist-names.js';
 
-export const useCheckCondition = ({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem, playlistNames }) => {
+/**
+ * Check the weather condition and wind speed to set the
+ * playlist name
+ * with a random playlist and the shuffle array
+ * this composable is also responsible for setting the body class
+ * based on the weather
+ *
+ *
+ * @param {string} condition
+ * @param {string} wind
+ * @param {function} setPlaylistName
+ * @param {function} setShuffleArray
+ * @param {function} randomArrayItem
+ */
+export const useCheckCondition = ({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem }) => {
 	useEffect(() => {
 		if (! condition || ! wind) return;
 		if (wind >= 15) {
