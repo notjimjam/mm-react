@@ -17,12 +17,21 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 	const [playlistTracks, setPlaylistTracks] = useState([]);
 	const [playlistName, setPlaylistName] = useState(null);
 	
+	/**
+	 * add to a button to allow a user to log out of MM
+	 * user will be returned to login component and background image will be
+	 * removed
+	 */
 	const logout = () => {
 		spotifyApi.resetCredentials();
 		setIsLoggedIn(false);
 		document.body.className = '';
 	};
 	
+	/**
+	 *
+	 * @param uri
+	 */
 	const addSongToLikedPlaylist = (uri) => {
 		spotifyApi.addToMySavedTracks([uri]).then((res) => {
 			console.log(`added track with uri: ${uri} to liked songs`);
@@ -31,6 +40,10 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		});
 	}
 	
+	/**
+	 *
+	 * @param uri
+	 */
 	const removeSongFromLikedPlaylist = (uri) => {
 		spotifyApi.removeFromMySavedTracks([uri]).then((res) => {
 			console.log(`removed track with uri: ${uri} from liked songs`);
@@ -39,11 +52,22 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		});
 	}
 	
+	/**
+	 * when accessToken is updated, set the accessToken for the spotifyApi
+	 * It provides the ability to make requests to the Spotify API
+	 */
 	useEffect(() => {
 		if (! accessToken) return;
 		spotifyApi.setAccessToken(accessToken);
 	}, [accessToken]);
 	
+	/**
+	 * when playlistName is updated, search for a playlist with the provided name
+	 * and set the playlist state with the returned playlist
+	 *
+	 * will map the returned playlist to an object with the name, description, uri,
+	 * imageUrl, and id
+	 */
 	useEffect(() => {
 		if (playlistName === null) return;
 		
@@ -60,9 +84,16 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 				}),
 			);
 		});
-		//useEffect only runs when playlistName is updated
 	}, [playlistName]);
 	
+	/**
+	 * when playlist variable is updated, get the tracks for the first playlist
+	 * in the array
+	 * will map the returned playlist tracks to an object with the artist, title,
+	 * uri, albumUrl, and index
+	 * possibility for multiple album images to be returned, so function will
+	 * select the smallest image available to use as the albumUrl
+	 */
 	useEffect(() => {
 		if (! accessToken) return;
 		if (! playlist.length > 0) return;
@@ -90,6 +121,10 @@ export const Dashboard = ({ code, setIsLoggedIn }) => {
 		});
 	}, [playlist]);
 	
+	/**
+	 * when prefilteredPlaylistTracks is updated, they get filtered to remove
+	 * any tracks that do not have an uri (usually unavailable tracks)
+	 */
 	useEffect(() => {
 		setPlaylistTracks(prefilteredPlaylistTracks.filter((track) => track.uri !== undefined));
 	}, [prefilteredPlaylistTracks]);
