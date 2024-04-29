@@ -1,4 +1,16 @@
-export const PlaylistTrack = ({ playlist, track, selectTrack, activeTrack }) => {
+/**
+ * import { PlaylistTrack } from '@/components/PlaylistTrack.jsx';
+ *
+ * a list of all available tracks in the playlist are displayed with artist,
+ * title, and album image
+ * on click, set the active track to the uri and will autoplay
+ *
+ * @param track
+ * @param selectTrack
+ *
+ * @returns {JSX.Element}
+ */
+export const PlaylistTrack = ({ track, selectTrack }) => {
 	return (
 		<div
 			onClick={() => selectTrack(track.uri)}
