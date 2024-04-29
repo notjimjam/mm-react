@@ -4,6 +4,11 @@ import { PlaylistTrack } from '@/components/PlaylistTrack.jsx';
 export const Playlist = ({ accessToken, playlist, playlistTracks }) => {
 	const [activeTrack, setActiveTrack] = useState();
 	
+	/**
+	 * on click, set the active track to the uri
+	 * active track will be passed to the Player component and will autoplay
+	 * @param uri
+	 */
 	const selectTrack = (uri) => {
 		setActiveTrack(uri);
 	}
