@@ -4,10 +4,22 @@ const authUrl = config.authUrl;
 const signUpUrl = config.signUpUrl;
 export const Login = () => {
 	
+	/**
+	 * on click, redirect to Spotify authentication url
+	 * aka login page
+	 * once log in is successful, the code is provided in the url and the
+	 * Dashboard component is rendered
+	 * @param e - click event
+	 */
 	const loginHandler = (e) => {
 		e.preventDefault();
 		window.location.href = authUrl;
 	}
+	
+	/**
+	 * on click, redirect to Spotify sign up page
+	 * @param e - click event
+	 */
 	const signUpHandler = (e) => {
 		e.preventDefault();
 		window.location.href = signUpUrl;
