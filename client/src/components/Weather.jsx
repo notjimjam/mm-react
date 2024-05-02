@@ -76,12 +76,6 @@ export const Weather = ({ setPlaylistName }) => {
 					>
 						Change?
 					</MMButton>
-					<MMButton
-						clickFunction={shufflePlaylists}
-						extraClass='small'
-					>
-						New
-					</MMButton>
 				</div>:
 				<div className='flex flex-row justify-center items-center gap-small'>
 					<input
@@ -99,6 +93,12 @@ export const Weather = ({ setPlaylistName }) => {
 					</MMButton>
 				</div>
 			}
+			<MMButton
+				clickFunction={shufflePlaylists}
+				extraClass='small'
+			>
+				Shuffle
+			</MMButton>
 		</div>
 		
 	)
