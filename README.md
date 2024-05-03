@@ -1,4 +1,4 @@
-![img](public/icons/mm-icon-mix.svg)
+![img](client/public/icons/mm-icon-mix.svg)
 # Music Meteorologist
 > Playlists curated for your local weather powered by Spotify 
 ## Overview
@@ -62,11 +62,11 @@ npm run start
 This will host the app on `http://localhost:3333`.
 
 ## Project Screenshots
-![img](public/images/login-screenshot.png)
-![img](public/images/dashboard-screenshot-4.png)
-![img](public/images/dashboard-screenshot.png)
-![img](public/images/dashboard-screenshot-2.png)
-![img](public/images/dashboard-screenshot-3.png)
+![img](client/public/images/login-screenshot.png)
+![img](client/public/images/dashboard-screenshot-4.png)
+![img](client/public/images/dashboard-screenshot.png)
+![img](client/public/images/dashboard-screenshot-2.png)
+![img](client/public/images/dashboard-screenshot-3.png)
 
 ## Authors
 Code and Design by Jamie Smith | [@notjimjam](https://github.com/notjimjam) | [LinkedIn](https://www.linkedin.com/in/jamiemsmithdev/)
