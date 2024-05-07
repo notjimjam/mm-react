@@ -70,7 +70,7 @@ export const Weather = ({ setPlaylistName }) => {
 	useEffect(() => {
 		if (weather !== null) {
 			setCondition(weather?.weather[0]?.main);
-			setWind(weather?.wind?.speed);
+			setWind(weather?.wind);
 		}
 	},[weather]);
 	

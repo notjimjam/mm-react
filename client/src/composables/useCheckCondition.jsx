@@ -17,7 +17,7 @@ import playlistNames from '../../cfg/playlist-names.js';
 export const useCheckCondition = ({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem }) => {
 	useEffect(() => {
 		if (! condition || ! wind) return;
-		if (wind >= 15) {
+		if (wind?.gust >= 15) {
 			setPlaylistName(randomArrayItem(playlistNames.windy));
 			setShuffleArray(playlistNames.windy)
 			document.body.className = 'mood-windy';
