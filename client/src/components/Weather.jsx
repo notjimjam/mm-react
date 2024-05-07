@@ -29,6 +29,10 @@ export const Weather = ({ setPlaylistName }) => {
 		setHasLocation(true);
 	}
 	
+	/**
+	 * allow user to submit input on 'enter'
+	 * @param event
+	 */
 	const onKeyDown = (event) => {
 		if (event.key === 'Enter') {
 			submitLocation(event);
@@ -46,6 +50,9 @@ export const Weather = ({ setPlaylistName }) => {
 		playlistTracks.scroll = { top: 0, behavior: 'smooth' };
 	}
 	
+	/**
+	 * fetch weather data from OpenWeather API based on user input
+	 */
 	useEffect(() => {
 		if (! value) return
 		const locationUrl = isNaN(parseInt(value)) ? 'q=' : 'zip='
@@ -57,6 +64,9 @@ export const Weather = ({ setPlaylistName }) => {
 		})
 	}, [value]);
 	
+	/**
+	 * set condition and wind state based on weather data
+	 */
 	useEffect(() => {
 		if (weather !== null) {
 			setCondition(weather?.weather[0]?.main);
@@ -64,6 +74,10 @@ export const Weather = ({ setPlaylistName }) => {
 		}
 	},[weather]);
 	
+	/**
+	 * check condition and wind state to determine playlist
+	 * see useCheckCondition.jsx for more details
+	 */
 	useCheckCondition({ condition, wind, setPlaylistName, setShuffleArray, randomArrayItem });
 	
 	return (
