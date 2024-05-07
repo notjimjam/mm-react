@@ -1,10 +1,23 @@
 import axios from 'axios';
 
+/**
+ * take in the code from the url and send it to the server to get
+ * the auth by making a post request to the server
+ *
+ * if the request is successful, set the auth state with the
+ * returned data
+ *
+ * if the request is unsuccessful, redirect to the home page
+ *
+ * if the auth has a refreshToken and expiresIn, set an interval to
+ * refresh the token after it expires (usually 1 hour)
+ *
+ * @param {string} code
+ *
+ * @returns {object} auth
+ */
 export const useAuth = (code) => {
 	const [auth, setAuth] = useState({});
-	const [accessToken, setAccessToken] = useState();
-	const [refreshToken, setRefreshToken] = useState();
-	const [expiresIn, setExpiresIn] = useState();
 	const active = useRef({});
 	
 	useEffect(() => {
@@ -16,9 +29,6 @@ export const useAuth = (code) => {
 		}
 		active.current.request.then(({data}) => {
 			setAuth(data);
-			setAccessToken(data.accessToken);
-			setRefreshToken(data.refreshToken);
-			setExpiresIn(data.expiresIn);
 			window.history.pushState({}, null, '/');
 		}).catch((err) => {
 			window.location = '/';
@@ -26,20 +36,19 @@ export const useAuth = (code) => {
 	}, [code]);
 	
 	useEffect(() => {
-		if (!refreshToken || !expiresIn) return;
+		if (!auth.refreshToken || !auth.expiresIn) return;
 		
 		const interval = setInterval(() => {
 			axios.post('http://localhost:3334/refresh', {
-				refreshToken,
+				refreshToken: auth.refreshToken,
 			}).then(({data}) => {
-				setAccessToken(data.accessToken);
-				setExpiresIn(data.expiresIn);
+				setAuth(data);
 			}).catch((err) => {
 				window.location = '/';
 			});
-		}, (expiresIn - 60) * 1000);
+		}, (auth.expiresIn - 60) * 1000);
 		return () => clearInterval(interval);
-	}, [refreshToken, expiresIn]);
+	}, [auth]);
 	
-	return auth && accessToken;
+	return auth;
 }

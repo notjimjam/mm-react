@@ -11,7 +11,8 @@ const spotifyApi = new SpotifyWebApi({
 });
 
 export const Dashboard = ({ code, setIsLoggedIn }) => {
-	const accessToken = useAuth(code);
+	const auth = useAuth(code);
+	const accessToken = auth.accessToken;
 	const [playlist, setPlaylist] = useState([]);
 	const [prefilteredPlaylistTracks, setPrefilteredPlaylistTracks] = useState([]);
 	const [playlistTracks, setPlaylistTracks] = useState([]);
